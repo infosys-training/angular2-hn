@@ -100,3 +100,6 @@ A million thanks to some awesome people :)
 * [Majid Hajian](https://github.com/mhadaily)
 * [Jeff Cross](https://github.com/jeffbcross)
 * [Minko Gechev](https://github.com/mgechev)
+
+---
+*Verification test*
