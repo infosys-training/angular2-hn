@@ -75,7 +75,6 @@ describe('HackerNewsAPIService', () => {
         const mockPollResult1: PollResult = { id: 457, points: 10 } as any;
         const mockPollResult2: PollResult = { id: 458, points: 20 } as any;
 
-        let callCount = 0;
         mockFetch.and.callFake((url: string) => {
             if (url.includes('item/456')) {
                 return Promise.resolve({

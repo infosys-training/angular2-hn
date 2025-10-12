@@ -45,9 +45,9 @@ describe('SettingsService', () => {
     });
 
     it('should initialize settings from localStorage when values exist', () => {
-        mockLocalStorage['openLinkInNewTab'] = 'true';
-        mockLocalStorage['titleFontSize'] = '18';
-        mockLocalStorage['listSpacing'] = '5';
+        mockLocalStorage.openLinkInNewTab = 'true';
+        mockLocalStorage.titleFontSize = '18';
+        mockLocalStorage.listSpacing = '5';
 
         const newService = new SettingsService();
         expect(newService.settings.openLinkInNewTab).toBe(true);
@@ -105,7 +105,7 @@ describe('SettingsService', () => {
     });
 
     it('should initialize theme from localStorage if saved', () => {
-        mockLocalStorage['theme'] = 'night';
+        mockLocalStorage.theme = 'night';
         const newService = new SettingsService();
         expect(newService.settings.theme).toBe('night');
     });
