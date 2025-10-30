@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { HackerNewsAPIService } from '../../shared/services/hackernews-api.service';
+import { FavoritesService } from '../../shared/services/favorites.service';
 import { Story } from '../../shared/models/story';
 
 @Component({
@@ -23,6 +24,7 @@ export class FeedComponent implements OnInit {
 
   constructor(
     private _hackerNewsAPIService: HackerNewsAPIService,
+    private _favoritesService: FavoritesService,
     private route: ActivatedRoute
   ) { }
 
@@ -35,15 +37,55 @@ export class FeedComponent implements OnInit {
 
     this.pageSub = this.route.params.subscribe(params => {
       this.pageNum = params['page'] ? +params['page'] : 1;
-      this._hackerNewsAPIService.fetchFeed(this.feedType, this.pageNum)
-        .subscribe(
-          items => this.items = items,
-          error => this.errorMessage = 'Could not load ' + this.feedType + ' stories.',
-          () => {
-            this.listStart = ((this.pageNum - 1) * 30) + 1;
-            window.scrollTo(0, 0);
-          }
-        );
+
+      if (this.feedType === 'favorites') {
+        this.loadFavorites();
+      } else {
+        this._hackerNewsAPIService.fetchFeed(this.feedType, this.pageNum)
+          .subscribe(
+            items => this.items = items,
+            error => this.errorMessage = 'Could not load ' + this.feedType + ' stories.',
+            () => {
+              this.listStart = ((this.pageNum - 1) * 30) + 1;
+              window.scrollTo(0, 0);
+            }
+          );
+      }
     });
+  }
+
+  loadFavorites() {
+    const favoriteIds = this._favoritesService.getFavorites();
+
+    if (favoriteIds.length === 0) {
+      this.items = [];
+      this.listStart = 0;
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    const startIndex = (this.pageNum - 1) * 30;
+    const endIndex = startIndex + 30;
+    const pageIds = favoriteIds.slice(startIndex, endIndex);
+
+    if (pageIds.length === 0) {
+      this.items = [];
+      this.listStart = 0;
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    const requests = pageIds.map(id =>
+      this._hackerNewsAPIService.fetchItemContent(id)
+    );
+
+    forkJoin(requests).subscribe(
+      items => this.items = items,
+      error => this.errorMessage = 'Could not load favorites.',
+      () => {
+        this.listStart = startIndex + 1;
+        window.scrollTo(0, 0);
+      }
+    );
   }
 }
