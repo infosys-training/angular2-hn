@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HackerNewsAPIService } from './shared/services/hackernews-api.service';
 import { SettingsService } from './shared/services/settings.service';
+import { FavouritesService } from './shared/services/favourites.service';
 
 @NgModule({
     declarations: [AppComponent, FeedComponent, ItemComponent],
@@ -26,7 +27,7 @@ import { SettingsService } from './shared/services/settings.service';
             enabled: environment.production,
         }),
     ],
-    providers: [HackerNewsAPIService, SettingsService],
+    providers: [HackerNewsAPIService, SettingsService, FavouritesService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
