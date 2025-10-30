@@ -1,0 +1,17 @@
+<div class="main-content">
+  <div class="favourites-header">
+    <h2>My Favourites</h2>
+    <button *ngIf="favourites.length > 0" class="clear-btn" (click)="clearAll()">Clear All</button>
+  </div>
+  
+  <div *ngIf="favourites.length === 0" class="empty-state">
+    <p>You haven't saved any favourites yet.</p>
+    <p>Click the ☆ icon next to any story to add it to your favourites.</p>
+  </div>
+  
+  <ol *ngIf="favourites.length > 0" class="list-margin" start="1">
+    <li *ngFor="let item of favourites" class="post">
+      <item class="item-block" [item]="item"></item>
+    </li>
+  </ol>
+</div>

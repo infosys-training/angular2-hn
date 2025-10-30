@@ -66,3 +66,20 @@ p {
   .item-details {
     padding: 10px;
   }
+.favourite-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 8px 0 0;
+    color: #888;
+    vertical-align: middle;
+
+    &:hover {
+        color: #ff6600;
+    }
+
+    &.is-favourite {
+        color: #ff6600;
+    }
+}

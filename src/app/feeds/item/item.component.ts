@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Story } from '../../shared/models/story';
 
 import { SettingsService } from '../../shared/services/settings.service';
+import { FavouritesService } from '../../shared/services/favourites.service';
 import { Settings } from '../../shared/models/settings';
 
 @Component({
@@ -13,7 +14,10 @@ export class ItemComponent implements OnInit {
   @Input() item: Story;
   settings: Settings;
 
-  constructor(private _settingsService: SettingsService) {
+  constructor(
+    private _settingsService: SettingsService,
+    private _favouritesService: FavouritesService
+  ) {
     this.settings = this._settingsService.settings;
   }
 
@@ -23,4 +27,11 @@ export class ItemComponent implements OnInit {
     return this.item.url.indexOf('http') === 0;
   }
 
+  isFavourite(): boolean {
+    return this._favouritesService.isFavourite(this.item.id);
+  }
+
+  toggleFavourite(): void {
+    this._favouritesService.toggleFavourite(this.item);
+  }
 }

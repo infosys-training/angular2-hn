@@ -1,0 +1,43 @@
+.favourites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .clear-btn {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    
+    &:hover {
+      background: #ff7700;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  
+  p {
+    margin: 10px 0;
+  }
+}
+
+.list-margin {
+  margin-left: 0;
+}
+
+.post {
+  margin-bottom: 10px;
+}

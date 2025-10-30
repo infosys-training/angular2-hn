@@ -1,4 +1,7 @@
 <div [ngStyle]="{'margin-bottom': settings.listSpacing+'px'}">
+  <button class="favourite-btn" (click)="toggleFavourite()" [class.is-favourite]="isFavourite()" title="Add to favourites">
+    {{ isFavourite() ? '★' : '☆' }}
+  </button>
   <p *ngIf="hasUrl">
     <a class="title" [ngStyle]="{'font-size': settings.titleFontSize+'px'}" href="{{item.url}}" [attr.target]="settings.openLinkInNewTab ? '_blank' : null" [attr.rel]="settings.openLinkInNewTab ? 'noopener' : null">
       {{item.title}}
