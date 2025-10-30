@@ -4,11 +4,17 @@
       {{item.title}}
     </a>
     <span *ngIf="item.domain" class="domain">({{item.domain}})</span>
+    <span class="favorite-toggle" (click)="toggleFavorite($event)" [class.is-favorite]="isFavorite()">
+      {{ isFavorite() ? '★' : '☆' }}
+    </span>
   </p>
   <p *ngIf="!hasUrl">
     <a class="title" [ngStyle]="{'font-size': settings.titleFontSize+'px'}" [routerLink]="['/item', item.id]" routerLinkActive="active">
       {{item.title}}
     </a>
+    <span class="favorite-toggle" (click)="toggleFavorite($event)" [class.is-favorite]="isFavorite()">
+      {{ isFavorite() ? '★' : '☆' }}
+    </span>
   </p>
   <div class="subtext-palm">
     <div class="details" *ngIf="item.type !== 'job'">

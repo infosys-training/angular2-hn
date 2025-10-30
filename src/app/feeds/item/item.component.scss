@@ -1,3 +1,20 @@
+.favorite-toggle {
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 18px;
+  color: #828282;
+  user-select: none;
+  
+  &:hover {
+    color: #ff6600;
+  }
+  
+  &.is-favorite {
+    color: #ff6600;
+  }
+}
+
+
 @import "../../shared/scss/media";
 @import "../../shared/scss/theme_variables";
 
