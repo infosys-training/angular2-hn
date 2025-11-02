@@ -14,17 +14,17 @@ export class HeaderComponent implements OnInit {
   searchText = '';
 
   constructor(
-    private _settingsService: SettingsService,
-    private _searchService: SearchService
+    private settingsService: SettingsService,
+    private searchService: SearchService
   ) {
-    this.settings = this._settingsService.settings;
+    this.settings = this.settingsService.settings;
   }
 
   ngOnInit() {
   }
 
   toggleSettings() {
-    this._settingsService.toggleSettings();
+    this.settingsService.toggleSettings();
   }
 
   scrollTop() {
@@ -32,11 +32,11 @@ export class HeaderComponent implements OnInit {
   }
 
   onSearch() {
-    this._searchService.setSearchTerm(this.searchText);
+    this.searchService.setSearchTerm(this.searchText);
   }
 
   onClearSearch() {
     this.searchText = '';
-    this._searchService.clearSearch();
+    this.searchService.clearSearch();
   }
 }

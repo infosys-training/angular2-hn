@@ -25,8 +25,8 @@ export class FeedComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   constructor(
-    private _hackerNewsAPIService: HackerNewsAPIService,
-    private _searchService: SearchService,
+    private hackerNewsAPIService: HackerNewsAPIService,
+    private searchService: SearchService,
     private route: ActivatedRoute
   ) { }
 
@@ -39,7 +39,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     this.pageSub = this.route.params.subscribe(params => {
       this.pageNum = params['page'] ? +params['page'] : 1;
-      this._hackerNewsAPIService.fetchFeed(this.feedType, this.pageNum)
+      this.hackerNewsAPIService.fetchFeed(this.feedType, this.pageNum)
         .subscribe(
           items => {
             this.originalItems = items;
@@ -54,7 +54,7 @@ export class FeedComponent implements OnInit, OnDestroy {
         );
     });
 
-    this.searchSub = this._searchService.searchTerm$.subscribe(searchTerm => {
+    this.searchSub = this.searchService.searchTerm$.subscribe(searchTerm => {
       this.applySearchFilter(searchTerm);
     });
   }
@@ -63,20 +63,26 @@ export class FeedComponent implements OnInit, OnDestroy {
     if (!this.originalItems) {
       return;
     }
-    
+
     if (!searchTerm || searchTerm.trim() === '') {
       this.items = this.originalItems;
     } else {
       const lowerSearchTerm = searchTerm.toLowerCase();
-      this.items = this.originalItems.filter(item => 
+      this.items = this.originalItems.filter(item =>
         item.title && item.title.toLowerCase().includes(lowerSearchTerm)
       );
     }
   }
 
   ngOnDestroy() {
-    if (this.typeSub) this.typeSub.unsubscribe();
-    if (this.pageSub) this.pageSub.unsubscribe();
-    if (this.searchSub) this.searchSub.unsubscribe();
+    if (this.typeSub) {
+      this.typeSub.unsubscribe();
+    }
+    if (this.pageSub) {
+      this.pageSub.unsubscribe();
+    }
+    if (this.searchSub) {
+      this.searchSub.unsubscribe();
+    }
   }
 }
