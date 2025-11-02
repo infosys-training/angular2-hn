@@ -4,4 +4,5 @@ export interface Settings {
    theme: string;
    titleFontSize: string;
    listSpacing: string;
+   searchText: string;
 }

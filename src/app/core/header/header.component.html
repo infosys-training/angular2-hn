@@ -7,14 +7,18 @@
       <div class="header-text">
         <div class="left">
           <span class="header-nav">
-            <a routerLink="/newest/1" routerLinkActive="active" (click)="scrollTop()">new</a>
+            <a routerLink="/newest/1" routerLinkActive="active" (click)="scrollTop()">New</a>
               |
-            <a routerLink="/show/1" routerLinkActive="active" (click)="scrollTop()">show</a>
+            <a routerLink="/show/1" routerLinkActive="active" (click)="scrollTop()">Show</a>
               |
-            <a routerLink="/ask/1" routerLinkActive="active" (click)="scrollTop()">ask</a>
+            <a routerLink="/ask/1" routerLinkActive="active" (click)="scrollTop()">Ask</a>
               |
-            <a routerLink="/jobs/1" routerLinkActive="active" (click)="scrollTop()">jobs</a>
+            <a routerLink="/jobs/1" routerLinkActive="active" (click)="scrollTop()">Jobs</a>
           </span>
+        </div>
+        <div class="search">
+          <input type="text" [(ngModel)]="searchText" placeholder="Search stories..." class="search-input">
+          <button (click)="onSearch()" class="search-button">Search</button>
         </div>
       </div>
       <div class="info">
