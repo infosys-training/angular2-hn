@@ -12,6 +12,7 @@ export class SettingsService {
     theme: 'default',
     titleFontSize: localStorage.getItem("titleFontSize") ? localStorage.getItem("titleFontSize") : '16',
     listSpacing: localStorage.getItem("listSpacing") ? localStorage.getItem("listSpacing") : '0',
+    searchText: '',
   };
 
   darkColorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
@@ -85,5 +86,9 @@ export class SettingsService {
   setSpacing(listSpace){
     this.settings.listSpacing = listSpace;
     localStorage.setItem("listSpacing", this.settings.listSpacing);
+  }
+
+  setSearchText(searchText: string) {
+    this.settings.searchText = searchText;
   }
 }
