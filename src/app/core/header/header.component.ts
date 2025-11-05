@@ -10,6 +10,7 @@ import { Settings } from '../../shared/models/settings';
 })
 export class HeaderComponent implements OnInit {
   settings: Settings;
+  searchText: string = '';
 
   constructor(private _settingsService: SettingsService) {
     this.settings = this._settingsService.settings;
@@ -24,5 +25,9 @@ export class HeaderComponent implements OnInit {
 
   scrollTop() {
     window.scrollTo(0, 0);
+  }
+
+  onSearch() {
+    this._settingsService.setSearchText(this.searchText);
   }
 }
