@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { Settings } from '../models/settings';
 
@@ -85,5 +86,12 @@ export class SettingsService {
   setSpacing(listSpace){
     this.settings.listSpacing = listSpace;
     localStorage.setItem("listSpacing", this.settings.listSpacing);
+  }
+
+  private searchTextSubject = new BehaviorSubject<string>('');
+  searchText$ = this.searchTextSubject.asObservable();
+
+  setSearchText(text: string) {
+    this.searchTextSubject.next(text);
   }
 }
