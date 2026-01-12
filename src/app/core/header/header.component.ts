@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SettingsService } from '../../shared/services/settings.service';
+import { SearchService } from '../../shared/services/search.service';
 import { Settings } from '../../shared/models/settings';
 
 @Component({
@@ -10,8 +11,12 @@ import { Settings } from '../../shared/models/settings';
 })
 export class HeaderComponent implements OnInit {
   settings: Settings;
+  searchTerm: string = '';
 
-  constructor(private _settingsService: SettingsService) {
+  constructor(
+    private _settingsService: SettingsService,
+    private _searchService: SearchService
+  ) {
     this.settings = this._settingsService.settings;
   }
 
@@ -24,5 +29,9 @@ export class HeaderComponent implements OnInit {
 
   scrollTop() {
     window.scrollTo(0, 0);
+  }
+
+  onSearch() {
+    this._searchService.setSearchTerm(this.searchTerm);
   }
 }
