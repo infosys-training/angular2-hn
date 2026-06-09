@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import fetch from 'unfetch';
 import {map } from 'rxjs/operators';
 
 import { Story } from '../models/story';

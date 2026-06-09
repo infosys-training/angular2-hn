@@ -25,9 +25,9 @@ export class SettingsService {
     this.unSubscribeToSystemPrefferedColorScheme();
   }
 
-  handleSystemPreferredColorSchemeChange(event: MediaQueryListEvent) {
+  handleSystemPreferredColorSchemeChange(mql: MediaQueryList) {
     let theme;
-    if (event.matches) {
+    if (mql.matches) {
       theme = 'night';
     } else {
       theme = 'default';
@@ -36,8 +36,7 @@ export class SettingsService {
   }
   
   subscribeToSystemPreferredColorScheme() {
-    this.darkColorSchemeMedia.addEventListener(
-      'change',
+    this.darkColorSchemeMedia.addListener(
       this.handleSystemPreferredColorSchemeChange.bind(this)
     );
   }
@@ -47,18 +46,12 @@ export class SettingsService {
     if (savedTheme) {
       this.settings.theme = savedTheme;
     } else {
-      this.darkColorSchemeMedia.dispatchEvent(
-        new MediaQueryListEvent('change', {
-          media: this.darkColorSchemeMedia.media,
-          matches: this.darkColorSchemeMedia.matches
-        })
-      );
+      this.handleSystemPreferredColorSchemeChange(this.darkColorSchemeMedia);
     }
   }
 
   unSubscribeToSystemPrefferedColorScheme() {
-    this.darkColorSchemeMedia.removeEventListener(
-      'change',
+    this.darkColorSchemeMedia.removeListener(
       this.handleSystemPreferredColorSchemeChange.bind(this)
     );
   }
