@@ -5,7 +5,7 @@ import { SettingsService } from '../../shared/services/settings.service';
 import { Settings } from '../../shared/models/settings';
 
 @Component({
-  selector: 'item',
+  selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
@@ -13,8 +13,8 @@ export class ItemComponent implements OnInit {
   @Input() item: Story;
   settings: Settings;
 
-  constructor(private _settingsService: SettingsService) {
-    this.settings = this._settingsService.settings;
+  constructor(private settingsService: SettingsService) {
+    this.settings = this.settingsService.settings;
   }
 
   ngOnInit() {}

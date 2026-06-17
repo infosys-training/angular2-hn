@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { HackerNewsAPIService } from '../shared/services/hackernews-api.service';
 import { SettingsService } from '../shared/services/settings.service';
@@ -14,33 +14,39 @@ import { Settings } from '../shared/models/settings';
   templateUrl: './item-details.component.html',
   styleUrls: ['./item-details.component.scss']
 })
-export class ItemDetailsComponent implements OnInit {
+export class ItemDetailsComponent implements OnInit, OnDestroy {
   sub: Subscription;
   item: Story;
   errorMessage = '';
   settings: Settings;
 
   constructor(
-    private _hackerNewsAPIService: HackerNewsAPIService,
-    private _settingsService: SettingsService,
+    private hackerNewsAPIService: HackerNewsAPIService,
+    private settingsService: SettingsService,
     private route: ActivatedRoute,
-    private _location: Location
+    private location: Location
   ) {
-    this.settings = this._settingsService.settings;
+    this.settings = this.settingsService.settings;
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      let itemID = +params['id'];
-      this._hackerNewsAPIService.fetchItemContent(itemID).subscribe(item => {
+      const itemID = +params.id;
+      this.hackerNewsAPIService.fetchItemContent(itemID).subscribe(item => {
         this.item = item;
       }, error => this.errorMessage = 'Could not load item comments.');
     });
     window.scrollTo(0, 0);
   }
 
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
+
   goBack() {
-    this._location.back();
+    this.location.back();
   }
 
   get hasUrl(): boolean {

@@ -11,30 +11,30 @@ import { Settings } from '../../shared/models/settings';
 export class SettingsComponent implements OnInit {
   settings: Settings;
 
-  constructor(private _settingsService: SettingsService) {
-    this.settings = this._settingsService.settings;
+  constructor(private settingsService: SettingsService) {
+    this.settings = this.settingsService.settings;
   }
 
   ngOnInit() {
   }
 
   closeSettings() {
-    this._settingsService.toggleSettings();
+    this.settingsService.toggleSettings();
   }
 
   toggleOpenLinksInNewTab() {
-    this._settingsService.toggleOpenLinksInNewTab();
+    this.settingsService.toggleOpenLinksInNewTab();
   }
 
   selectTheme(theme) {
-    this._settingsService.setTheme(theme);
+    this.settingsService.setTheme(theme);
   }
 
-  changeTitleFont(val){
-    this._settingsService.setFont(val);
+  changeTitleFont(val) {
+    this.settingsService.setFont(val);
   }
 
-  changeSpacing(val){
-    this._settingsService.setSpacing(val);
+  changeSpacing(val) {
+    this.settingsService.setSpacing(val);
   }
 }
