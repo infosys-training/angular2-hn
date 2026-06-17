@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { SettingsService } from './shared/services/settings.service';
 import { Settings } from './shared/models/settings';
 
-declare let ga: Function;
+declare let ga: (...args: string[]) => void;
 
 @Component({
   selector: 'app-root',
@@ -23,8 +23,10 @@ export class AppComponent {
     this.settings = this._settingsService.settings;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        ga('set', 'page', event.urlAfterRedirects);
-        ga('send', 'pageview');
+        if (typeof ga === 'function') {
+          ga('set', 'page', event.urlAfterRedirects);
+          ga('send', 'pageview');
+        }
       }
     });
   }
