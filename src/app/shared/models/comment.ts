@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 export class Comment {
     id: number;
     level: number;
@@ -8,3 +9,4 @@ export class Comment {
     deleted: boolean;
     comments: Comment[];
 }
+// tslint:enable:variable-name

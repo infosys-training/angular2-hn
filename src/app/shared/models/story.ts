@@ -2,13 +2,14 @@ import { Comment } from './comment';
 import { FeedType } from './feed-type.type';
 import { PollResult } from './poll-result';
 
+// tslint:disable:variable-name
 export class Story {
     id: number;
     title: string;
     points: number;
     user: string;
     time: number;
-    time_ago: number;
+    time_ago: string;
     type: FeedType;
     url: string;
     domain: string;
@@ -19,3 +20,4 @@ export class Story {
     deleted: boolean;
     dead: boolean;
 }
+// tslint:enable:variable-name

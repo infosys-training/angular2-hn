@@ -12,7 +12,7 @@ const routes: Routes = [
     path: ':id',
     component: ItemDetailsComponent
   }
-]
+];
 
 @NgModule({
   imports: [ SharedComponentsModule, CommonModule, RouterModule, PipesModule, RouterModule.forChild(routes) ],

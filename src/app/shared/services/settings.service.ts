@@ -1,28 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 import { Settings } from '../models/settings';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SettingsService {
+export class SettingsService implements OnDestroy {
   settings: Settings = {
-    showSettings : false,
-    openLinkInNewTab: localStorage.getItem("openLinkInNewTab") ? JSON.parse(localStorage.getItem("openLinkInNewTab")) : false,
+    showSettings: false,
+    openLinkInNewTab: localStorage.getItem('openLinkInNewTab') ? JSON.parse(localStorage.getItem('openLinkInNewTab')) : false,
     theme: 'default',
-    titleFontSize: localStorage.getItem("titleFontSize") ? localStorage.getItem("titleFontSize") : '16',
-    listSpacing: localStorage.getItem("listSpacing") ? localStorage.getItem("listSpacing") : '0',
+    titleFontSize: localStorage.getItem('titleFontSize') ? localStorage.getItem('titleFontSize') : '16',
+    listSpacing: localStorage.getItem('listSpacing') ? localStorage.getItem('listSpacing') : '0',
   };
 
   darkColorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-  
+  private boundHandleColorSchemeChange = this.handleSystemPreferredColorSchemeChange.bind(this);
+
   constructor() {
     this.subscribeToSystemPreferredColorScheme();
     this.initTheme();
   }
-  
+
   ngOnDestroy() {
-    this.unSubscribeToSystemPrefferedColorScheme();
+    this.unSubscribeToSystemPreferredColorScheme();
   }
 
   handleSystemPreferredColorSchemeChange(event: MediaQueryListEvent) {
@@ -34,16 +35,16 @@ export class SettingsService {
     }
     this.setTheme(theme);
   }
-  
+
   subscribeToSystemPreferredColorScheme() {
     this.darkColorSchemeMedia.addEventListener(
       'change',
-      this.handleSystemPreferredColorSchemeChange.bind(this)
+      this.boundHandleColorSchemeChange
     );
   }
 
   initTheme() {
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       this.settings.theme = savedTheme;
     } else {
@@ -56,10 +57,10 @@ export class SettingsService {
     }
   }
 
-  unSubscribeToSystemPrefferedColorScheme() {
+  unSubscribeToSystemPreferredColorScheme() {
     this.darkColorSchemeMedia.removeEventListener(
       'change',
-      this.handleSystemPreferredColorSchemeChange.bind(this)
+      this.boundHandleColorSchemeChange
     );
   }
 
@@ -69,21 +70,21 @@ export class SettingsService {
 
   toggleOpenLinksInNewTab() {
     this.settings.openLinkInNewTab = !this.settings.openLinkInNewTab;
-    localStorage.setItem("openLinkInNewTab", JSON.stringify(this.settings.openLinkInNewTab));
+    localStorage.setItem('openLinkInNewTab', JSON.stringify(this.settings.openLinkInNewTab));
   }
 
   setTheme(theme) {
     this.settings.theme = theme;
-    localStorage.setItem("theme", this.settings.theme);
+    localStorage.setItem('theme', this.settings.theme);
   }
 
-  setFont(fontSize){
+  setFont(fontSize) {
     this.settings.titleFontSize = fontSize;
-    localStorage.setItem("titleFontSize", this.settings.titleFontSize);
+    localStorage.setItem('titleFontSize', this.settings.titleFontSize);
   }
 
-  setSpacing(listSpace){
+  setSpacing(listSpace) {
     this.settings.listSpacing = listSpace;
-    localStorage.setItem("listSpacing", this.settings.listSpacing);
+    localStorage.setItem('listSpacing', this.settings.listSpacing);
   }
 }

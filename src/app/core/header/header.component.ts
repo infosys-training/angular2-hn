@@ -11,15 +11,15 @@ import { Settings } from '../../shared/models/settings';
 export class HeaderComponent implements OnInit {
   settings: Settings;
 
-  constructor(private _settingsService: SettingsService) {
-    this.settings = this._settingsService.settings;
+  constructor(private settingsService: SettingsService) {
+    this.settings = this.settingsService.settings;
   }
 
   ngOnInit() {
   }
 
   toggleSettings() {
-    this._settingsService.toggleSettings();
+    this.settingsService.toggleSettings();
   }
 
   scrollTop() {
