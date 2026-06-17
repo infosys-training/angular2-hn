@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { HackerNewsAPIService } from '../shared/services/hackernews-api.service';
 import { User } from '../shared/models/user';
@@ -11,7 +11,7 @@ import { User } from '../shared/models/user';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   sub: Subscription;
   user: User;
   errorMessage = '';
@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      let userID = params['id'];
+      const userID = params.id;
       this._hackerNewsAPIService.fetchUser(userID).subscribe(data => {
         this.user = data;
       }, error => this.errorMessage = 'Could not load user ' + userID + '.');
@@ -33,5 +33,11 @@ export class UserComponent implements OnInit {
 
   goBack() {
     this._location.back();
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

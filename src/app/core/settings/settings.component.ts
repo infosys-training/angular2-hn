@@ -26,15 +26,15 @@ export class SettingsComponent implements OnInit {
     this._settingsService.toggleOpenLinksInNewTab();
   }
 
-  selectTheme(theme) {
+  selectTheme(theme: string) {
     this._settingsService.setTheme(theme);
   }
 
-  changeTitleFont(val){
+  changeTitleFont(val: string) {
     this._settingsService.setFont(val);
   }
 
-  changeSpacing(val){
+  changeSpacing(val: string) {
     this._settingsService.setSpacing(val);
   }
 }

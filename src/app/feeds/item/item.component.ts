@@ -5,7 +5,7 @@ import { SettingsService } from '../../shared/services/settings.service';
 import { Settings } from '../../shared/models/settings';
 
 @Component({
-  selector: 'item',
+  selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
@@ -20,7 +20,7 @@ export class ItemComponent implements OnInit {
   ngOnInit() {}
 
   get hasUrl(): boolean {
-    return this.item.url.indexOf('http') === 0;
+    return !!this.item.url && this.item.url.indexOf('http') === 0;
   }
 
 }
