@@ -6,23 +6,37 @@ import {map } from 'rxjs/operators';
 import { Story } from '../models/story';
 import { User } from '../models/user';
 import { PollResult } from '../models/poll-result';
+import { environment } from '../../../environments/environment';
 
-// wrap fetch in observable so we can keep it chill
+// Microservices architecture:
+//   Gateway (:3000) → Feed Service (:3001), Item Service (:3002), User Service (:3003)
+// When apiGatewayUrl is set, requests go through the gateway.
+// When empty, falls back to the original external HN API.
 @Injectable()
 export class HackerNewsAPIService {
   baseUrl: string;
 
   constructor() {
-    this.baseUrl = 'https://node-hnapi.herokuapp.com';
+    this.baseUrl = environment.apiGatewayUrl || 'https://node-hnapi.herokuapp.com';
   }
 
   fetchFeed(feedType: string, page: number): Observable<Story[]> {
-    return lazyFetch(`${this.baseUrl}/${feedType}?page=${page}`);
+    const url = environment.apiGatewayUrl
+      ? `${this.baseUrl}/api/feeds/${feedType}?page=${page}`
+      : `${this.baseUrl}/${feedType}?page=${page}`;
+    return lazyFetch(url).pipe(map((response: any) => {
+      // Gateway wraps items in { items, feedType, page, hasMore }
+      return response.items || response;
+    }));
   }
 
   fetchItemContent(id: number): Observable<Story> {
-    return lazyFetch(`${this.baseUrl}/item/${id}`).pipe(map((story: Story) => {
-      if (story.type === 'poll') {
+    const url = environment.apiGatewayUrl
+      ? `${this.baseUrl}/api/items/${id}`
+      : `${this.baseUrl}/item/${id}`;
+    return lazyFetch(url).pipe(map((story: Story) => {
+      if (!environment.apiGatewayUrl && story.type === 'poll') {
+        // Poll enrichment handled server-side in item-service when using gateway
         let numberOfPollOptions = story.poll.length;
         story.poll_votes_count = 0;
         for (let i = 1; i <= numberOfPollOptions; i++) {
@@ -37,11 +51,17 @@ export class HackerNewsAPIService {
   }
 
   fetchPollContent(id: number): Observable<PollResult> {
-    return lazyFetch(`${this.baseUrl}/item/${id}`);
+    const url = environment.apiGatewayUrl
+      ? `${this.baseUrl}/api/items/${id}`
+      : `${this.baseUrl}/item/${id}`;
+    return lazyFetch(url);
   }
 
   fetchUser(id: string): Observable<User> {
-    return lazyFetch(`${this.baseUrl}/user/${id}`);
+    const url = environment.apiGatewayUrl
+      ? `${this.baseUrl}/api/users/${id}`
+      : `${this.baseUrl}/user/${id}`;
+    return lazyFetch(url);
   }
 }
 

@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  // Microservices API Gateway URL — set to deployed gateway URL in production
+  apiGatewayUrl: '',
 };
