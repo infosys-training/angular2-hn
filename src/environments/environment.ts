@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // Microservices API Gateway URL (use empty string to fall back to external API)
+  apiGatewayUrl: 'http://localhost:3000',
 };
 
 /*

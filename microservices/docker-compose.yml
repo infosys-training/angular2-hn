@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - FEED_SERVICE_URL=http://feed-service:3001
+      - ITEM_SERVICE_URL=http://item-service:3002
+      - USER_SERVICE_URL=http://user-service:3003
+      - CORS_ORIGIN=http://localhost:4200
+    depends_on:
+      - feed-service
+      - item-service
+      - user-service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health/simple"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  feed-service:
+    build: ./feed-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - HN_API_BASE_URL=https://node-hnapi.herokuapp.com
+      - FEED_CACHE_TTL=120
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  item-service:
+    build: ./item-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - HN_API_BASE_URL=https://node-hnapi.herokuapp.com
+      - ITEM_CACHE_TTL=300
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - HN_API_BASE_URL=https://node-hnapi.herokuapp.com
+      - USER_CACHE_TTL=900
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  default:
+    name: hn-microservices
