@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import fetch from 'unfetch';
-import {map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Story } from '../models/story';
 import { User } from '../models/user';
