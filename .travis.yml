@@ -1,17 +1,27 @@
 language: node_js
 node_js:
-  - "6.9"
+  - "22.12"
 
 branches:
   only:
     - master
 
+cache:
+  directories:
+    - node_modules
+
+addons:
+  chrome: stable
+
 before_script:
   - npm install -g firebase-tools
-  - npm install -g @angular/cli
 
 script:
+  - npm run lint
   - npm run build
+  - npm test -- --watch=false --browsers=ChromeHeadlessNoSandbox
+  - npx playwright install --with-deps chromium
+  - npm run e2e
 
 after_success:
   - firebase use default
