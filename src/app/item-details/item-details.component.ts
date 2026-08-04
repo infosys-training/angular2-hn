@@ -31,7 +31,7 @@ export class ItemDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      let itemID = +params['id'];
+      const itemID = +params['id'];
       this._hackerNewsAPIService.fetchItemContent(itemID).subscribe(item => {
         this.item = item;
       }, error => this.errorMessage = 'Could not load item comments.');
