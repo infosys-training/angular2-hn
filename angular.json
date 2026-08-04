@@ -16,6 +16,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "defaultConfiguration": "production",
           "options": {
             "aot": true,
             "outputPath": "dist/angular-hnpwa",
@@ -63,6 +64,14 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           }
         },
@@ -74,8 +83,12 @@
           "configurations": {
             "production": {
               "buildTarget": "angular-hnpwa:build:production"
+            },
+            "development": {
+              "buildTarget": "angular-hnpwa:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
