@@ -8,16 +8,13 @@ Even if you have little to no experience with Angular, I'll be more than happy t
 1. Fork the repo
 2. Clone your fork
 3. Make a branch for your feature or bug fix
-4. If you don't have Angular CLI installed: `npm install -g angular-cli@latest`
-5. `ng init`
-6. Type `n` for each file to not overwrite any file changes
-7. Run `npm start` and open `localhost:4200` in a browser
-8. Work your magic
-9. Run `npm run build` or `npm run static-serve` to kick off a production build and make sure nothing is broken
-10. To test service worker changes:
-  * `npm run build` to kick off a fresh build and update the `dist/` directory
-  * `npm run precache` to generate the service worker file
-  * `npm run static-serve` to load the application along with the service worker asset using [live-server](https://github.com/tapio/live-server)
+4. Ensure you have a supported Node.js version installed (`^20.19 || ^22.12 || ^24`)
+5. `npm install` to install dependencies (this includes the Angular CLI locally — no global install needed; run it via `npx ng ...`)
+6. Run `npm start` and open `localhost:4200` in a browser
+7. Work your magic
+8. Run `npm run lint`, `npm test`, and `npm run e2e` to make sure nothing is broken (for e2e, run `npx playwright install chromium` once first)
+9. Run `npm run build` to make sure the production build succeeds
+10. To test service worker changes, run `npm run build` and serve the `dist/angular-hnpwa` output over HTTP (e.g. `npx http-server dist/angular-hnpwa -p 8080`) — the service worker is disabled in the dev server
 11. Add yourself to the [contributor's list](https://github.com/hdjirdeh/angular2-hn#contributors) in the README!
 12. Commit your changes and reference the issue you're addressing (for example: `git commit -am 'Commit message. Closes #5'`)
 13. Push your branch to your fork
