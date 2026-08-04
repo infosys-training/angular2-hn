@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { SettingsService } from '../../shared/services/settings.service';
 import { Settings } from '../../shared/models/settings';
@@ -10,9 +10,11 @@ import { Settings } from '../../shared/models/settings';
     standalone: false
 })
 export class SettingsComponent implements OnInit {
+  private _settingsService = inject(SettingsService);
+
   settings: Settings;
 
-  constructor(private _settingsService: SettingsService) {
+  constructor() {
     this.settings = this._settingsService.settings;
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { SettingsService } from './shared/services/settings.service';
@@ -14,13 +14,13 @@ declare let ga: (...args: unknown[]) => void;
 })
 
 export class AppComponent {
+  private _settingsService = inject(SettingsService);
+  router = inject(Router);
+
   settings: Settings;
   theme: string;
 
-  constructor(
-    private _settingsService: SettingsService,
-    public router: Router
-  ) {
+  constructor() {
     this.settings = this._settingsService.settings;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
