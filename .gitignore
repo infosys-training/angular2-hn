@@ -33,6 +33,11 @@ speed-measure-plugin.json
 !.vscode/extensions.json
 .history/*
 
+# e2e (Playwright)
+/test-results
+/playwright-report
+/playwright/.cache
+
 # misc
 /.sass-cache
 /connect.lock
