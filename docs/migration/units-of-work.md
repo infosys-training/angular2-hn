@@ -47,7 +47,8 @@ Standard acceptance criteria (SAC) applied to every construction unit:
 | C6 | Karma headless | `karma.conf.js` `ChromeHeadlessNoSandbox` custom launcher, `singleRun` via CLI | `npm test -- --watch=false` exits 0 in CI/container |
 | C7 | E2E replacement | delete Protractor assets; add Playwright config + smoke spec, `e2e` npm script | `npm run e2e` runs Playwright against the dev server |
 | C8 | Application builder + output layout | `angular.json` build target → `:application`, `browser`/`outputPath`, `polyfills` array, `buildTarget` | `dist/angular-hnpwa/browser/index.html` + `ngsw.json` produced |
-| C9 | Standalone-flag correctness | `standalone: false` on every NgModule-declared component/pipe (App, Header, Footer, Settings, Feed, Item, ItemDetails, Comment, User, Loader, ErrorMessage, CommentPipe) | build+test pass on v19/20 |
+| C9 | Standalone architecture | converted every component/pipe to standalone and pruned all NgModules instead of stamping `standalone: false` (angular-eslint's `prefer-standalone` rejects the opt-out); routing via `provideRouter` + lazy route files, bootstrap via `bootstrapApplication` | build+test+lint pass on v19/20 with no NgModule left |
+| C10 | Control flow + `inject()` | `ng generate @angular/core:control-flow` and `@angular/core:inject`; `CommonModule` no longer needed anywhere | no `*ngIf`/`*ngFor`/`*ngSwitch` or constructor injection remains; lint clean |
 
 ## Phase D — Operation config
 
@@ -64,3 +65,27 @@ Standard acceptance criteria (SAC) applied to every construction unit:
 |---|---|---|---|
 | E1 | Per-task token/cost capture | log `input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`, `output_tokens` per unit, multiply by per-million rates | `aidlc-cost-table.md` populated for every unit above |
 | E2 | Prompt-cache discipline | stable byte-identical prefix (package.json + angular.json + tsconfigs + file tree + conventions) with only the task instruction varying | prefix template committed in `prompt-prefix.md`, cache-read tokens non-zero from task 2 onward |
+
+## Final state
+
+| Check | Command | Result |
+|---|---|---|
+| install | `npm install` | clean (`legacy-peer-deps=true` in `.npmrc`) |
+| lint | `npm run lint` | angular-eslint, all files pass |
+| unit tests | `npm test -- --watch=false` | 6/6 pass on ChromeHeadlessNoSandbox |
+| dev build | `npm run build -- --configuration development` | succeeds |
+| prod build | `npm run build` | succeeds; emits `ngsw-worker.js` + `ngsw.json` into `dist/angular-hnpwa/browser` |
+| e2e | `npm run e2e` | 3/3 Playwright specs pass |
+
+Deviations from the plan:
+
+- C9 became a full standalone conversion rather than explicit `standalone: false` flags (see above).
+- `@angular/core:explicit-standalone-flag` does not exist in the installed Angular versions; the
+  `standalone-migration` schematics were used instead.
+- `src/polyfills.ts` and `src/test.ts` were deleted: the `@angular/build` builders take
+  `polyfills: ["zone.js"]` / `["zone.js", "zone.js/testing"]` from `angular.json` and initialise
+  the test environment themselves.
+- `manifest.webmanifest` never existed in this repo (only `src/manifest.json`), so `ngsw-config.json`
+  and the asset lists now point at `manifest.json` and the duplicate `<link rel="manifest">` in
+  `src/index.html` was removed.
+- E1 token counts are recorded as `not captured`, not estimated — see [`aidlc-metrics.md`](aidlc-metrics.md).

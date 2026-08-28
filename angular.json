@@ -34,10 +34,6 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "extractLicenses": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true,
             "browser": "src/main.ts"
           },
           "configurations": {
@@ -63,6 +59,12 @@
                 }
               ],
               "serviceWorker": "ngsw-config.json"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -75,8 +77,12 @@
           "configurations": {
             "production": {
               "buildTarget": "angular-hnpwa:build:production"
+            },
+            "development": {
+              "buildTarget": "angular-hnpwa:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
