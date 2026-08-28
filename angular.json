@@ -130,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "angular-hnpwa"
+  "defaultProject": "angular-hnpwa",
+  "cli": {
+    "packageManager": "npm"
+  }
 }
