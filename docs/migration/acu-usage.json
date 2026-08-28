@@ -161,5 +161,91 @@
       "duration_seconds": 590,
       "acus": 5.6204
     }
-  ]
+  ],
+  "prompt_cache": {
+    "note": "Devin bills in ACUs and does not price prompt cache separately, nor expose Claude cache_read_input_tokens/cache_creation_input_tokens. These figures are derived from the session's context_growth_update telemetry (current_context_tokens per agent iteration): the stable prefix re-sent on iteration N (= context size at N-1) is what a prompt cache serves as a cache read, and the delta is newly written cache.",
+    "source": "context_growth_update events (41 samples, iterations 1-59), linearly interpolated between samples",
+    "measured_window": {
+      "iterations": [
+        1,
+        59
+      ],
+      "prompt_tokens": 4687264,
+      "cache_read_tokens": 4583352,
+      "cache_creation_tokens": 103912,
+      "hit_rate_pct": 97.8
+    },
+    "extrapolated_full_session": {
+      "iterations": [
+        1,
+        150
+      ],
+      "prompt_tokens": 19136288,
+      "cache_read_tokens": 18923832,
+      "cache_creation_tokens": 212456,
+      "hit_rate_pct": 98.9,
+      "slope_tokens_per_iteration": 1193
+    },
+    "context_tokens_per_iteration": {
+      "1": 34730,
+      "2": 38863,
+      "3": 44822,
+      "4": 46325,
+      "5": 53798,
+      "6": 54348,
+      "7": 57223,
+      "8": 58063,
+      "9": 62634,
+      "10": 65242,
+      "11": 66137,
+      "12": 67274,
+      "13": 67830,
+      "14": 68386,
+      "15": 69055,
+      "16": 69586,
+      "17": 70802,
+      "18": 72047,
+      "19": 72476,
+      "20": 72904,
+      "21": 73986,
+      "22": 74575,
+      "23": 75164,
+      "24": 76604,
+      "25": 77318,
+      "26": 78033,
+      "27": 78564,
+      "28": 79094,
+      "29": 80170,
+      "30": 81246,
+      "31": 81757,
+      "32": 82268,
+      "33": 83363,
+      "34": 83940,
+      "35": 84516,
+      "36": 86140,
+      "37": 86840,
+      "38": 87540,
+      "39": 87902,
+      "40": 88264,
+      "41": 89157,
+      "42": 90050,
+      "43": 92004,
+      "44": 92625,
+      "45": 93247,
+      "46": 93868,
+      "47": 94508,
+      "48": 95507,
+      "49": 96324,
+      "50": 97140,
+      "51": 98496,
+      "52": 99373,
+      "53": 100250,
+      "54": 101127,
+      "55": 101462,
+      "56": 102156,
+      "57": 102850,
+      "58": 103381,
+      "59": 103912
+    }
+  }
 }

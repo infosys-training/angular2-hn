@@ -100,6 +100,42 @@ def main() -> None:
         row[0].alignment = Alignment(wrap_text=True, vertical="top")
     sm.cell(row=13, column=2).number_format = '"$"#,##0.00'
 
+    cache = usage.get("prompt_cache")
+    if cache:
+        cs = wb.create_sheet("Prompt cache")
+        cs.append(["Prompt cache / context reuse"])
+        cs["A1"].font = Font(bold=True, size=14)
+        cs.append([cache["note"]])
+        cs.append([f"Source: {cache['source']}"])
+        cs.append([])
+        cs.append(["Scope", "Iterations", "Prompt tokens processed", "Cache-read tokens", "Cache-creation tokens", "Cache hit rate"])
+        for c in range(1, 7):
+            cell = cs.cell(row=cs.max_row, column=c)
+            cell.fill, cell.font, cell.border = head_fill, head_font, border
+            cell.alignment = Alignment(horizontal="center", wrap_text=True)
+        for label, key in (("Measured window", "measured_window"), ("Full session (extrapolated)", "extrapolated_full_session")):
+            d = cache[key]
+            cs.append([label, f"{d['iterations'][0]}-{d['iterations'][1]}", d["prompt_tokens"], d["cache_read_tokens"], d["cache_creation_tokens"], d["hit_rate_pct"] / 100])
+            for c in range(1, 7):
+                cs.cell(row=cs.max_row, column=c).border = border
+            cs.cell(row=cs.max_row, column=6).number_format = "0.0%"
+            for c in (3, 4, 5):
+                cs.cell(row=cs.max_row, column=c).number_format = "#,##0"
+        cs.append([])
+        cs.append(["Agent iteration", "Context tokens", "Cache-read tokens", "Cache-creation tokens"])
+        for c in range(1, 5):
+            cell = cs.cell(row=cs.max_row, column=c)
+            cell.fill, cell.font, cell.border = head_fill, head_font, border
+        prev = 0
+        for it, tokens in sorted(cache["context_tokens_per_iteration"].items(), key=lambda kv: int(kv[0])):
+            cs.append([int(it), tokens, prev, tokens - prev])
+            for c in range(1, 5):
+                cs.cell(row=cs.max_row, column=c).border = border
+                cs.cell(row=cs.max_row, column=c).number_format = "#,##0"
+            prev = tokens
+        for col, width in zip("ABCDEF", (28, 18, 24, 22, 24, 16)):
+            cs.column_dimensions[col].width = width
+
     out = ROOT / args.out
     wb.save(out)
     print(f"wrote {out} ({out.stat().st_size} bytes)")

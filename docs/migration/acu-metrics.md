@@ -73,6 +73,33 @@ Raw data lives in <a href="./acu-usage.json">acu-usage.json</a>.
   `output_tokens`) remain "not captured" in <a href="./aidlc-metrics.md">aidlc-metrics.md</a> —
   Devin does not expose the underlying model usage objects.
 
+## Prompt cache / context reuse
+
+ACU billing has **no cache dimension** — Devin charges compute, not tokens, so a cache hit shows
+up only as fewer ACUs, never as a separate line item. Devin also does not expose Claude's
+`cache_read_input_tokens` / `cache_creation_input_tokens`.
+
+What *is* observable is the session's context telemetry (`context_growth_update`:
+`current_context_tokens` per agent iteration). The stable prefix re-sent on iteration N is exactly
+what a prompt cache serves as a read, and the growth is what it writes:
+
+```
+cache_read(N)     ≈ context_tokens(N-1)
+cache_creation(N) ≈ context_tokens(N) - context_tokens(N-1)
+```
+
+| Scope | Iterations | Prompt tokens processed | Cache-read tokens | Cache-creation tokens | Hit rate |
+|---|---|---|---|---|---|
+| Measured (41 samples, interpolated) | 1–59 | 4,687,264 | 4,583,352 | 103,912 | 97.8% |
+| Full session (extrapolated at 1,193 tokens/iteration) | 1–150 | 19,136,288 | 18,923,832 | 212,456 | 98.9% |
+
+Context grew from 34,730 tokens (iteration 1) to 103,912 (iteration 59) — ~1,193 tokens per
+iteration, consistent with the stable prompt prefix in
+<a href="./prompt-prefix.md">prompt-prefix.md</a> being reused rather than rebuilt. Telemetry stops
+at iteration 59 (17:19:39, the Angular 15 unit); rows beyond that are an extrapolation, not a
+measurement. Per-iteration figures are on the "Prompt cache" sheet of the workbook and under
+`prompt_cache` in <a href="./acu-usage.json">acu-usage.json</a>.
+
 ## Spreadsheet
 
 <a href="./aidlc-acu-metrics.xlsx">aidlc-acu-metrics.xlsx</a> holds the same table (regenerate with `python3 scripts/aidlc-acu-xlsx.py --rate <usd>`).
