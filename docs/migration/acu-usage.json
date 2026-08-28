@@ -1,0 +1,165 @@
+{
+  "session_id": "devin-b089339539c84cfb8fe4913619e49d66",
+  "session_url": "https://infosys.devinenterprise.com/sessions/b089339539c84cfb8fe4913619e49d66",
+  "repository": "infosys-training/angular2-hn",
+  "pull_request": "https://github.com/infosys-training/angular2-hn/pull/35",
+  "measured": {
+    "metric": "ACU (Agent Compute Unit)",
+    "source": "Devin session API: acu_consumption_at_last_user_interaction events + session acus_consumed",
+    "acus_at_session_start": 0.0,
+    "acus_at_end_of_migration_work": 20.252405955702983,
+    "migration_acus": 20.252405955702983,
+    "migration_window_utc": [
+      "2026-08-28T17:06:16Z",
+      "2026-08-28T17:52:44Z"
+    ],
+    "billable_wall_clock_minutes": 35.43
+  },
+  "attribution": {
+    "method": "Session-level ACU total is measured. Per-task values are attributed pro rata by each task's wall-clock duration, using commit timestamps on branch devin/1787936828-ng9-to-ng20-migration as task boundaries. Devin does not expose per-task ACU counters.",
+    "confidence": "task rows are derived, not measured"
+  },
+  "rate": {
+    "currency": "USD",
+    "price_per_acu": 2.25,
+    "note": "Devin list price; override with --rate for your contracted enterprise rate."
+  },
+  "tasks": [
+    {
+      "id": "A1-A3",
+      "task": "Inception: read repo config, BRD, units of work + acceptance criteria",
+      "start_utc": "17:06:16",
+      "end_utc": "17:09:20",
+      "duration_seconds": 184,
+      "acus": 1.7528
+    },
+    {
+      "id": "B1",
+      "task": "Angular 9 -> 10 (npm package manager, headless karma launcher)",
+      "start_utc": "17:09:20",
+      "end_utc": "17:11:16",
+      "duration_seconds": 116,
+      "acus": 1.105
+    },
+    {
+      "id": "B2",
+      "task": "Angular 10 -> 11 (+ first unit specs, legacy-peer-deps)",
+      "start_utc": "17:11:16",
+      "end_utc": "17:13:00",
+      "duration_seconds": 104,
+      "acus": 0.9907
+    },
+    {
+      "id": "B3",
+      "task": "Angular 11 -> 12",
+      "start_utc": "17:13:00",
+      "end_utc": "17:14:13",
+      "duration_seconds": 73,
+      "acus": 0.6954
+    },
+    {
+      "id": "C1",
+      "task": "RxJS 7 imports, drop rxjs-compat, sass math.div",
+      "start_utc": "17:14:13",
+      "end_utc": "17:15:20",
+      "duration_seconds": 67,
+      "acus": 0.6382
+    },
+    {
+      "id": "B4",
+      "task": "Angular 12 -> 13",
+      "start_utc": "17:15:20",
+      "end_utc": "17:16:04",
+      "duration_seconds": 44,
+      "acus": 0.4191
+    },
+    {
+      "id": "C5",
+      "task": "TSLint/codelyzer -> angular-eslint + fix violations",
+      "start_utc": "17:16:04",
+      "end_utc": "17:17:18",
+      "duration_seconds": 74,
+      "acus": 0.7049
+    },
+    {
+      "id": "B5",
+      "task": "Angular 13 -> 14",
+      "start_utc": "17:17:18",
+      "end_utc": "17:18:12",
+      "duration_seconds": 54,
+      "acus": 0.5144
+    },
+    {
+      "id": "B6",
+      "task": "Angular 14 -> 15 (+ Protractor removal)",
+      "start_utc": "17:18:12",
+      "end_utc": "17:19:17",
+      "duration_seconds": 65,
+      "acus": 0.6192
+    },
+    {
+      "id": "B7",
+      "task": "Angular 15 -> 16",
+      "start_utc": "17:19:17",
+      "end_utc": "17:20:04",
+      "duration_seconds": 47,
+      "acus": 0.4477
+    },
+    {
+      "id": "B8",
+      "task": "Angular 16 -> 17",
+      "start_utc": "17:20:04",
+      "end_utc": "17:20:52",
+      "duration_seconds": 48,
+      "acus": 0.4573
+    },
+    {
+      "id": "B9",
+      "task": "Angular 17 -> 18",
+      "start_utc": "17:20:52",
+      "end_utc": "17:21:41",
+      "duration_seconds": 49,
+      "acus": 0.4668
+    },
+    {
+      "id": "C9+B10",
+      "task": "Standalone migration, provideRouter/provideServiceWorker bootstrap, Angular 19",
+      "start_utc": "17:21:41",
+      "end_utc": "17:24:14",
+      "duration_seconds": 153,
+      "acus": 1.4575
+    },
+    {
+      "id": "B11+C6-C8",
+      "task": "Angular 20, application builder, control flow, inject(), Playwright e2e, ops config",
+      "start_utc": "17:24:14",
+      "end_utc": "17:28:09",
+      "duration_seconds": 235,
+      "acus": 2.2386
+    },
+    {
+      "id": "E1-E2",
+      "task": "AIDLC prompt-prefix generator, cost tooling, final unit status",
+      "start_utc": "17:28:09",
+      "end_utc": "17:30:54",
+      "duration_seconds": 165,
+      "acus": 1.5718
+    },
+    {
+      "id": "D-PR",
+      "task": "PR #35 creation and summary",
+      "start_utc": "17:30:54",
+      "end_utc": "17:31:52",
+      "duration_seconds": 58,
+      "acus": 0.5525
+    },
+    {
+      "id": "V1",
+      "task": "Post-PR verification (prod build, service worker/manifest serve check), test plan, testing handoff",
+      "start_utc": "17:42:54",
+      "end_utc": "17:52:44",
+      "duration_seconds": 590,
+      "acus": 5.6204
+    }
+  ]
+}
