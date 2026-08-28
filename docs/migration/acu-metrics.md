@@ -72,3 +72,7 @@ Raw data lives in <a href="./acu-usage.json">acu-usage.json</a>.
 - Claude-token metrics (`input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`,
   `output_tokens`) remain "not captured" in <a href="./aidlc-metrics.md">aidlc-metrics.md</a> —
   Devin does not expose the underlying model usage objects.
+
+## Spreadsheet
+
+<a href="./aidlc-acu-metrics.xlsx">aidlc-acu-metrics.xlsx</a> holds the same table (regenerate with `python3 scripts/aidlc-acu-xlsx.py --rate <usd>`).
