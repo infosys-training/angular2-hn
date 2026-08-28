@@ -21,8 +21,7 @@
     "@angular/router": "~12.2.17",
     "@angular/service-worker": "~12.2.17",
     "node-fetch": "^2.6.0",
-    "rxjs": "~6.5.4",
-    "rxjs-compat": "^6.5.2",
+    "rxjs": "~7.8.0",
     "tslib": "^2.0.0",
     "unfetch": "^4.1.0",
     "zone.js": "~0.11.4"
