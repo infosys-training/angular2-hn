@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute, RouterLinkActive, RouterLink } from '@angular/router';
+import { Location, NgIf, NgFor, NgStyle } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { HackerNewsAPIService } from '../shared/services/hackernews-api.service';
@@ -8,11 +8,16 @@ import { SettingsService } from '../shared/services/settings.service';
 
 import { Story } from '../shared/models/story';
 import { Settings } from '../shared/models/settings';
+import { LoaderComponent } from '../shared/components/loader/loader.component';
+import { ErrorMessageComponent } from '../shared/components/error-message/error-message.component';
+import { CommentComponent } from './comment/comment.component';
+import { CommentPipe } from '../shared/pipes/comment.pipe';
 
 @Component({
-  selector: 'app-item-details',
-  templateUrl: './item-details.component.html',
-  styleUrls: ['./item-details.component.scss']
+    selector: 'app-item-details',
+    templateUrl: './item-details.component.html',
+    styleUrls: ['./item-details.component.scss'],
+    imports: [NgIf, LoaderComponent, ErrorMessageComponent, RouterLinkActive, RouterLink, NgFor, NgStyle, CommentComponent, CommentPipe]
 })
 export class ItemDetailsComponent implements OnInit {
   sub: Subscription;
