@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLinkActive, RouterLink } from '@angular/router';
-import { Location, NgIf, NgFor, NgStyle } from '@angular/common';
+import { Location, NgStyle } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { HackerNewsAPIService } from '../shared/services/hackernews-api.service';
@@ -17,20 +17,20 @@ import { CommentPipe } from '../shared/pipes/comment.pipe';
     selector: 'app-item-details',
     templateUrl: './item-details.component.html',
     styleUrls: ['./item-details.component.scss'],
-    imports: [NgIf, LoaderComponent, ErrorMessageComponent, RouterLinkActive, RouterLink, NgFor, NgStyle, CommentComponent, CommentPipe]
+    imports: [LoaderComponent, ErrorMessageComponent, RouterLinkActive, RouterLink, NgStyle, CommentComponent, CommentPipe]
 })
 export class ItemDetailsComponent implements OnInit {
+  private _hackerNewsAPIService = inject(HackerNewsAPIService);
+  private _settingsService = inject(SettingsService);
+  private route = inject(ActivatedRoute);
+  private _location = inject(Location);
+
   sub: Subscription;
   item: Story;
   errorMessage = '';
   settings: Settings;
 
-  constructor(
-    private _hackerNewsAPIService: HackerNewsAPIService,
-    private _settingsService: SettingsService,
-    private route: ActivatedRoute,
-    private _location: Location
-  ) {
+  constructor() {
     this.settings = this._settingsService.settings;
   }
 

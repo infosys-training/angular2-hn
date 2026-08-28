@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location, NgIf } from '@angular/common';
+import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { HackerNewsAPIService } from '../shared/services/hackernews-api.service';
@@ -12,18 +12,16 @@ import { ErrorMessageComponent } from '../shared/components/error-message/error-
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss'],
-    imports: [NgIf, LoaderComponent, ErrorMessageComponent]
+    imports: [LoaderComponent, ErrorMessageComponent]
 })
 export class UserComponent implements OnInit {
+  private _hackerNewsAPIService = inject(HackerNewsAPIService);
+  private route = inject(ActivatedRoute);
+  private _location = inject(Location);
+
   sub: Subscription;
   user: User;
   errorMessage = '';
-
-  constructor(
-    private _hackerNewsAPIService: HackerNewsAPIService,
-    private route: ActivatedRoute,
-    private _location: Location
-  ) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

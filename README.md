@@ -43,7 +43,7 @@
 
 ## Offline Support
 
-This app uses [Workbox](https://workboxjs.org/) to generate a service worker as part of the build step to load quickly and work offline.
+This app uses the [Angular service worker](https://angular.dev/ecosystem/service-workers) (`@angular/service-worker`, configured in `ngsw-config.json`) to load quickly and work offline. `ngsw-worker.js` and `ngsw.json` are emitted by production builds.
 
 ## Manifest
 
@@ -73,16 +73,23 @@ Feel free to send me feedback on [twitter](https://twitter.com/hdjirdeh) or [fil
 
 ## Build process
 
-Note: This project has been ejected (with AOT + production settings) in order to customize Webpack configurations.
+This project runs on Angular 20 with the Angular CLI application builder (`@angular/build:application`). Node `^20.19 || ^22.12 || ^24` is required.
 
  - Clone or download the repo
  - `npm install`
- - `npm start` to run the application with webpack-dev-server or `npm build` to kick off a fresh build and update the output directory (`dist/`)
+ - `npm start` to serve the app on http://localhost:4200
+ - `npm run build` for a production build; output goes to `dist/angular-hnpwa/browser`
+ - `npm test -- --watch=false` to run the Karma/Jasmine unit specs headlessly
+ - `npm run lint` to run angular-eslint
+ - `npm run e2e` to run the Playwright end-to-end specs (they start the dev server automatically)
 
-Note: Any Service Worker changes will not be reflected when you run the application locally in development. To test service worker changes:
- - `npm build`
- - `npm run precache` to generate the service worker file
- - `npm run static-serve` to load the application along with the service worker asset using [live-server](https://github.com/tapio/live-server)
+Note: the service worker is only registered in production builds. To test service worker changes locally:
+ - `npm run build`
+ - serve the build output, e.g. `npx http-server dist/angular-hnpwa/browser -p 8080`
+
+Firebase Hosting serves `dist/angular-hnpwa/browser` (see `firebase.json`); deploy with `firebase deploy`.
+
+Migration notes for the Angular 9 → 20 upgrade live in [`docs/migration`](docs/migration).
 
 ## Contributors
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { SettingsService } from '../../shared/services/settings.service';
 import { Settings } from '../../shared/models/settings';
@@ -9,9 +9,11 @@ import { Settings } from '../../shared/models/settings';
     styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent {
+  private _settingsService = inject(SettingsService);
+
   settings: Settings;
 
-  constructor(private _settingsService: SettingsService) {
+  constructor() {
     this.settings = this._settingsService.settings;
   }
 
