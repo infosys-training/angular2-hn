@@ -1,0 +1,150 @@
+{
+  "report": "DEVIN ACU consumption report - Angular 9 to 20 migration",
+  "session_id": "devin-b089339539c84cfb8fe4913619e49d66",
+  "session_url": "https://infosys.devinenterprise.com/sessions/b089339539c84cfb8fe4913619e49d66",
+  "repository": "infosys-training/angular2-hn",
+  "pull_request": "https://github.com/infosys-training/angular2-hn/pull/35",
+  "rate": {
+    "currency": "USD",
+    "price_per_acu": 2.25,
+    "note": "Devin list-price assumption. Enterprise ACU rates are set per order form (docs.devin.ai/admin/billing/enterprise) and were not exposed to this session."
+  },
+  "measurement_sources": {
+    "per_interaction_acus": "Devin session API event type acu_consumption_at_last_user_interaction (15 events, 10 distinct checkpoints) - MEASURED",
+    "session_total_acus": "Devin session API field acus_consumed - MEASURED",
+    "per_task_acus": "Derived: session total split pro rata by wall-clock duration between commits on branch devin/1787936828-ng9-to-ng20-migration - DERIVED",
+    "context_reuse": "Devin session API event type context_growth_update, 41 samples over iterations 1-59 - MEASURED within window, extrapolated beyond",
+    "model_identity": "NOT EXPOSED. The session API, event stream and Devin docs do not report the underlying model or the agent mode (Devin default / Lite / Fast / Ultra / Fusion) for a completed session."
+  },
+  "interaction_ledger": [
+    {
+      "n": 1,
+      "checkpoint_utc": "2026-08-28T17:06:20Z",
+      "cumulative_acus": 0.0,
+      "delta_acus": 0.0,
+      "paid_for": "Session start (migration request received)",
+      "category": "Start",
+      "avoidable": "n/a"
+    },
+    {
+      "n": 2,
+      "checkpoint_utc": "2026-08-28T18:30:47Z",
+      "cumulative_acus": 20.252405955702983,
+      "delta_acus": 20.252405955702983,
+      "paid_for": "Full migration: inception, Angular 9->20, angular-eslint, standalone, application builder, Playwright, ops config, PR #35, post-PR verification, testing-agent handoff",
+      "category": "Delivery",
+      "avoidable": "No - this is the deliverable"
+    },
+    {
+      "n": 3,
+      "checkpoint_utc": "2026-08-28T18:37:34Z",
+      "cumulative_acus": 23.9862651486464,
+      "delta_acus": 3.7338591929434165,
+      "paid_for": "ACU metrics table + acu-usage.json + acu-metrics.md + cost script",
+      "category": "Reporting",
+      "avoidable": "Partly - could have been produced inside the migration request"
+    },
+    {
+      "n": 4,
+      "checkpoint_utc": "2026-08-28T18:44:11Z",
+      "cumulative_acus": 24.623755539257587,
+      "delta_acus": 0.6374903906111865,
+      "paid_for": "XLSX generation of the same metrics",
+      "category": "Reporting",
+      "avoidable": "Yes - output format could have been specified up front"
+    },
+    {
+      "n": 5,
+      "checkpoint_utc": "2026-08-31T05:21:57Z",
+      "cumulative_acus": 27.26112574305972,
+      "delta_acus": 2.637370203802134,
+      "paid_for": "Prompt-cache/context-reuse derivation and extra workbook sheet",
+      "category": "Reporting",
+      "avoidable": "Yes - cache dimension could have been requested with the first metrics ask"
+    },
+    {
+      "n": 6,
+      "checkpoint_utc": "2026-08-31T05:40:25Z",
+      "cumulative_acus": 28.33125004080998,
+      "delta_acus": 1.0701242977502595,
+      "paid_for": "Leadership narrative of the metrics",
+      "category": "Reporting",
+      "avoidable": "Partly"
+    },
+    {
+      "n": 7,
+      "checkpoint_utc": "2026-08-31T06:00:52Z",
+      "cumulative_acus": 29.63744509556525,
+      "delta_acus": 1.3061950547552703,
+      "paid_for": "Line-by-line walkthrough of the workbook",
+      "category": "Reporting",
+      "avoidable": "Partly - overlaps the previous narrative"
+    },
+    {
+      "n": 8,
+      "checkpoint_utc": "2026-09-01T05:21:36Z",
+      "cumulative_acus": 31.412598133316177,
+      "delta_acus": 1.7751530377509276,
+      "paid_for": "Model-identity investigation + ACU reduction recommendations (request was sent twice)",
+      "category": "Reporting",
+      "avoidable": "Partly - duplicate submission of the same question"
+    },
+    {
+      "n": 9,
+      "checkpoint_utc": "2026-09-01T10:56:36Z",
+      "cumulative_acus": 34.117503459008695,
+      "delta_acus": 2.7049053256925177,
+      "paid_for": "Workbook efficiency analysis + leadership briefing document",
+      "category": "Reporting",
+      "avoidable": "Partly - overlaps checkpoints 6-8"
+    }
+  ],
+  "phase_rollup": [
+    {
+      "phase": "Inception",
+      "acus": 1.7528,
+      "basis": "Derived",
+      "content": "Repo read, BRD, units of work, acceptance criteria"
+    },
+    {
+      "phase": "Construction",
+      "acus": 10.7549,
+      "basis": "Derived",
+      "content": "11 Angular major bumps + RxJS 7, angular-eslint, standalone, control flow, application builder, Playwright, ops config"
+    },
+    {
+      "phase": "Operation",
+      "acus": 0.5525,
+      "basis": "Derived",
+      "content": "PR #35 creation and summary (CI/Firebase/ngsw file edits are inside the Angular 20 construction row)"
+    },
+    {
+      "phase": "Validation",
+      "acus": 5.6204,
+      "basis": "Derived",
+      "content": "Post-PR prod build, service-worker/manifest serve check, adversarial test plan, testing-agent handoff"
+    },
+    {
+      "phase": "Governance / AIDLC tooling",
+      "acus": 1.5718,
+      "basis": "Derived",
+      "content": "Byte-stable prompt-prefix generator, cost scripts, unit status"
+    },
+    {
+      "phase": "Reporting (post-delivery Q&A)",
+      "acus": 13.865097503305712,
+      "basis": "Measured",
+      "content": "Eight follow-up requests for metrics, xlsx, cache detail, explanations and optimisation analysis"
+    }
+  ],
+  "outcome_evidence": {
+    "lint": "pass (all files)",
+    "unit_tests": "6/6 pass",
+    "dev_build": "pass",
+    "prod_build": "pass with service-worker assets",
+    "e2e": "3/3 Playwright pass",
+    "pull_request": "https://github.com/infosys-training/angular2-hn/pull/35",
+    "angular_versions_traversed": 11,
+    "not_completed": "Browser testing-agent run aborted with usage_limit_exceeded - no recording or screenshots exist"
+  }
+}
