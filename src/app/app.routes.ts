@@ -1,13 +1,13 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { FeedComponent } from './feeds/feed/feed.component';
 
-const feedRoutes = [{
+const feedRoutes: Routes = [{
   path: ':page',
   component: FeedComponent
 }];
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: '', redirectTo: 'news/1', pathMatch: 'full'},
   {
     path: 'news',
@@ -34,10 +34,6 @@ const routes: Routes = [
     children: feedRoutes,
     data: {feedType: 'jobs'}
   },
-  {path: 'item', loadChildren: () => import('./item-details/item-details.module').then(m => m.ItemDetailsModule)},
-  {path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule)}
+  {path: 'item', loadChildren: () => import('./item-details/item-details.routes').then(m => m.itemDetailsRoutes)},
+  {path: 'user', loadChildren: () => import('./user/user.routes').then(m => m.userRoutes)}
 ];
-
-
-// - Updated Export
-export const routing = RouterModule.forRoot(routes);
