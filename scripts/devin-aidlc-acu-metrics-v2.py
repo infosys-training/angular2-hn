@@ -49,23 +49,16 @@ GOVERNANCE_IDS = {"E1-E2"}
 
 COVERED = {
     "Inception": (
-        "Read package.json, angular.json, tsconfig*.json and the src/app tree; produced the migration BRD "
-        "(current vs target versions, every breaking change 9->20); split it into units of work with "
-        "acceptance criteria per unit."),
+        "Understood the existing app and planned the migration: BRD of current vs target versions and every "
+        "breaking change, broken into one unit of work per version with acceptance criteria."),
     "Construction": (
-        "11 sequential major upgrades (ng update 9->10->...->20) with npm install + build + test after each; "
-        "RxJS 6->7 and removal of rxjs-compat; Sass math.div fix; TSLint/codelyzer replaced by angular-eslint "
-        "and all violations fixed; Protractor removed and Playwright e2e added; full standalone conversion "
-        "(NgModules pruned, bootstrapApplication + provideRouter/provideServiceWorker); control-flow syntax "
-        "(@if/@for) and inject() migration; new @angular/build:application builder; first unit specs written "
-        "(repo had none); ops config updated (.travis.yml, firebase.json, ngsw-config.json, README). "
-        "INCLUDES Operation (PR #35 raised, 0.5525 ACUs) and Validation (production build, service-worker and "
-        "manifest served over HTTP, adversarial test plan, browser-testing handoff, 5.6204 ACUs)."),
+        "Did the migration: 11 major Angular upgrades one at a time, modernised the code and toolchain "
+        "(RxJS 7, ESLint, standalone, new control flow, new builder, Playwright tests) and updated the CI, "
+        "hosting and docs config. Includes Operation (raised PR #35) and Validation (builds, lint, unit and "
+        "e2e tests green after each step)."),
     "Governance / AIDLC tooling (optional)": (
-        "Not required to migrate the app. Byte-stable prompt-prefix generator (scripts/aidlc-prompt-prefix.mjs) "
-        "that keeps the cached prefix identical across tasks, the AIDLC cost scripts, and the unit-status "
-        "bookkeeping. One-time asset: reusable by every future migration, so it should be amortised, not "
-        "charged to this migration."),
+        "Optional. Reusable AIDLC instrumentation - the stable prompt prefix and the cost/usage reporting "
+        "scripts. Not needed to migrate the app, and reusable on future migrations."),
 }
 
 BASIS = {
@@ -167,8 +160,8 @@ def sheet_main(wb, usage, rate, rates):
     ws.cell(row=row, column=1, value="Delivery total excluding optional governance tooling").alignment = WRAP
     ws.cell(row=row, column=9, value=f"=I{total_row}-I{last}")
     ws.cell(row=row, column=11, value=f"=I{row}*{rate}").number_format = '"$"#,##0.00'
-    ws.cell(row=row, column=12, value="What the migration itself cost if the reusable AIDLC tooling is "
-                                      "amortised across future migrations rather than charged here.").alignment = WRAP
+    ws.cell(row=row, column=12, value="Cost of the migration alone, with the reusable tooling "
+                                      "excluded.").alignment = WRAP
 
     row += 2
     ws.cell(row=row, column=1, value="Note").font = BOLD
@@ -180,7 +173,7 @@ def sheet_main(wb, usage, rate, rates):
     autosize(ws, [24, 46, 24, 13, 11, 13, 14, 11, 10, 40, 13, 84])
     ws.row_dimensions[5].height = 30
     for rr in range(first, last + 1):
-        ws.row_dimensions[rr].height = 110
+        ws.row_dimensions[rr].height = 62
     return ws
 
 
