@@ -83,6 +83,16 @@ This project runs on Angular 20 with the Angular CLI application builder (`@angu
  - `npm run lint` to run angular-eslint
  - `npm run e2e` to run the Playwright end-to-end specs (they start the dev server automatically)
 
+## Quality gate
+
+`npm run verify` runs the full gate — angular-eslint, unit specs with coverage, a production build, and the Playwright specs — and is what CI runs on every push. Coverage lands in `coverage/angular-hnpwa` (`lcov.info` for SonarQube, `cobertura-coverage.xml`, and a browsable HTML report).
+
+ - `npm run test:ci` unit specs headlessly with coverage
+ - `npm run lint:report` ESLint JSON report for SonarQube, in `reports/`
+ - `npm run audit:deps` fails on high/critical CVEs in shipped dependencies; `npm run audit:all` reports build-time findings without failing
+ - `npm run sonar` SonarQube scan (needs `sonar-scanner` and `SONAR_TOKEN`; see `sonar-project.properties`)
+ - `npm run snyk:deps` / `npm run snyk:code` dependency and SAST scans (need `SNYK_TOKEN`)
+
 Note: the service worker is only registered in production builds. To test service worker changes locally:
  - `npm run build`
  - serve the build output, e.g. `npx http-server dist/angular-hnpwa/browser -p 8080`

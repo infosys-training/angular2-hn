@@ -1,0 +1,14 @@
+# Snyk policy file.
+# Dependency scan: npm run snyk:deps   (snyk test --severity-threshold=high)
+# SAST scan:       npm run snyk:code   (snyk code test --severity-threshold=high)
+# Both require SNYK_TOKEN in the environment.
+version: v1.25.0
+
+# No ignores. Add entries here only with an expiry date and a reason, e.g.
+# ignore:
+#   SNYK-JS-EXAMPLE-1234567:
+#     - '*':
+#         reason: No fix available; not reachable from application code
+#         expires: 2026-12-31T00:00:00.000Z
+ignore: {}
+patch: {}
