@@ -1,12 +1,23 @@
 import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { provideServiceWorker } from '@angular/service-worker';
 
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { routes } from './app/app.routes';
+import { AppComponent } from './app/app.component';
+import { HackerNewsAPIService } from './app/shared/services/hackernews-api.service';
+import { SettingsService } from './app/shared/services/settings.service';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    provideServiceWorker('ngsw-worker.js', { enabled: environment.production }),
+    HackerNewsAPIService,
+    SettingsService
+  ]
+}).catch(err => console.error(err));

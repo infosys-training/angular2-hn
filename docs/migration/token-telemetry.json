@@ -1,0 +1,479 @@
+{
+ "source": "Devin session API, event type context_growth_update, session devin-b089339539c84cfb8fe4913619e49d66 (50 sampled agent iterations, 1..235)",
+ "field_mapping": {
+  "cache_read_tokens": "PROXY: context already resident at the start of an iteration (current_context_tokens of the previous iteration). A prompt cache serves exactly this prefix as a cache read. Devin does not expose Claude's cache_read_input_tokens.",
+  "cache_creation_tokens": "PROXY: positive delta in current_context_tokens between iterations, i.e. tokens newly written into the cached prefix. Devin does not expose cache_creation_input_tokens.",
+  "input_tokens": "PROXY: share of the new tokens attributable to tool results (delta in total_tool_output_bytes / measured bytes-per-token of that iteration).",
+  "output_tokens": "PROXY: remainder of the new tokens, i.e. model-generated text and tool invocations (delta context tokens - tool-result tokens).",
+  "billing": "NONE of these token counts are billed by Devin. Devin bills ACUs only; token volume is an efficiency indicator."
+ },
+ "regions": {
+  "construction_measured": {
+   "iterations": [
+    1,
+    57
+   ],
+   "iteration_steps": 56,
+   "samples": 40,
+   "window_utc": [
+    "2026-08-28T17:06:25Z",
+    "2026-08-28T17:18:47Z"
+   ],
+   "cache_read_tokens": 4377122,
+   "cache_creation_tokens": 68120,
+   "prompt_tokens": 4445242,
+   "hit_rate_pct": 98.47,
+   "new_tokens_per_iteration": 1216,
+   "avg_context_tokens": 78163,
+   "input_tokens": 32074,
+   "output_tokens": 36046,
+   "input_share": 0.471,
+   "output_share": 0.529
+  },
+  "reporting_measured": {
+   "iterations": [
+    200,
+    225
+   ],
+   "iteration_steps": 25,
+   "samples": 7,
+   "window_utc": [
+    "2026-09-01T10:57:22Z",
+    "2026-09-01T11:04:31Z"
+   ],
+   "cache_read_tokens": 2873461,
+   "cache_creation_tokens": 80843,
+   "prompt_tokens": 2954304,
+   "hit_rate_pct": 97.26,
+   "new_tokens_per_iteration": 3234,
+   "avg_context_tokens": 114938,
+   "input_tokens": 42695,
+   "output_tokens": 38148,
+   "input_share": 0.528,
+   "output_share": 0.472
+  }
+ },
+ "compaction_events": [
+  {
+   "iterations": [
+    197,
+    200
+   ],
+   "from_tokens": 128784,
+   "to_tokens": 67194,
+   "note": "context compaction/pruning; deltas are negative and excluded from cache-creation"
+  },
+  {
+   "iterations": [
+    221,
+    225
+   ],
+   "from_tokens": 148037,
+   "to_tokens": 78241,
+   "note": "context compaction/pruning"
+  }
+ ],
+ "peak_context_tokens": 148037,
+ "samples": [
+  {
+   "ts": "2026-08-28T17:06:25.515000Z",
+   "it": 1,
+   "ctx_tok": 34730,
+   "ctx_bytes": 62691,
+   "tool_out_bytes": 7471,
+   "tool_inv_bytes": 310
+  },
+  {
+   "ts": "2026-08-28T17:06:29.366000Z",
+   "it": 2,
+   "ctx_tok": 38863,
+   "ctx_bytes": 71918,
+   "tool_out_bytes": 18294,
+   "tool_inv_bytes": 487
+  },
+  {
+   "ts": "2026-08-28T17:06:32.848000Z",
+   "it": 3,
+   "ctx_tok": 44822,
+   "ctx_bytes": 84954,
+   "tool_out_bytes": 20712,
+   "tool_inv_bytes": 601
+  },
+  {
+   "ts": "2026-08-28T17:06:42.590000Z",
+   "it": 4,
+   "ctx_tok": 46325,
+   "ctx_bytes": 88596,
+   "tool_out_bytes": 37068,
+   "tool_inv_bytes": 1944
+  },
+  {
+   "ts": "2026-08-28T17:06:48.646000Z",
+   "it": 5,
+   "ctx_tok": 53798,
+   "ctx_bytes": 106816,
+   "tool_out_bytes": 37764,
+   "tool_inv_bytes": 2067
+  },
+  {
+   "ts": "2026-08-28T17:07:02.155000Z",
+   "it": 6,
+   "ctx_tok": 54348,
+   "ctx_bytes": 108761,
+   "tool_out_bytes": 43273,
+   "tool_inv_bytes": 2407
+  },
+  {
+   "ts": "2026-08-28T17:07:08.911000Z",
+   "it": 7,
+   "ctx_tok": 57223,
+   "ctx_bytes": 118468,
+   "tool_out_bytes": 44046,
+   "tool_inv_bytes": 2621
+  },
+  {
+   "ts": "2026-08-28T17:08:11.068000Z",
+   "it": 8,
+   "ctx_tok": 58063,
+   "ctx_bytes": 120977,
+   "tool_out_bytes": 44128,
+   "tool_inv_bytes": 12737
+  },
+  {
+   "ts": "2026-08-28T17:08:44.644000Z",
+   "it": 9,
+   "ctx_tok": 62634,
+   "ctx_bytes": 131258,
+   "tool_out_bytes": 44220,
+   "tool_inv_bytes": 18422
+  },
+  {
+   "ts": "2026-08-28T17:08:53.881000Z",
+   "it": 10,
+   "ctx_tok": 65242,
+   "ctx_bytes": 137075,
+   "tool_out_bytes": 45348,
+   "tool_inv_bytes": 18585
+  },
+  {
+   "ts": "2026-08-28T17:09:16.029000Z",
+   "it": 11,
+   "ctx_tok": 66137,
+   "ctx_bytes": 140190,
+   "tool_out_bytes": 47341,
+   "tool_inv_bytes": 18735
+  },
+  {
+   "ts": "2026-08-28T17:09:20.317000Z",
+   "it": 12,
+   "ctx_tok": 67274,
+   "ctx_bytes": 142949,
+   "tool_out_bytes": 48302,
+   "tool_inv_bytes": 19021
+  },
+  {
+   "ts": "2026-08-28T17:09:39.623000Z",
+   "it": 14,
+   "ctx_tok": 68386,
+   "ctx_bytes": 145802,
+   "tool_out_bytes": 49659,
+   "tool_inv_bytes": 19431
+  },
+  {
+   "ts": "2026-08-28T17:09:46.948000Z",
+   "it": 15,
+   "ctx_tok": 69055,
+   "ctx_bytes": 148362,
+   "tool_out_bytes": 50552,
+   "tool_inv_bytes": 19637
+  },
+  {
+   "ts": "2026-08-28T17:10:16.594000Z",
+   "it": 16,
+   "ctx_tok": 69586,
+   "ctx_bytes": 150010,
+   "tool_out_bytes": 52927,
+   "tool_inv_bytes": 19906
+  },
+  {
+   "ts": "2026-08-28T17:10:29.022000Z",
+   "it": 17,
+   "ctx_tok": 70802,
+   "ctx_bytes": 153694,
+   "tool_out_bytes": 56118,
+   "tool_inv_bytes": 19944
+  },
+  {
+   "ts": "2026-08-28T17:10:45.431000Z",
+   "it": 18,
+   "ctx_tok": 72047,
+   "ctx_bytes": 156968,
+   "tool_out_bytes": 56252,
+   "tool_inv_bytes": 20114
+  },
+  {
+   "ts": "2026-08-28T17:11:01.328000Z",
+   "it": 20,
+   "ctx_tok": 72904,
+   "ctx_bytes": 159509,
+   "tool_out_bytes": 57725,
+   "tool_inv_bytes": 20636
+  },
+  {
+   "ts": "2026-08-28T17:11:12.076000Z",
+   "it": 21,
+   "ctx_tok": 73986,
+   "ctx_bytes": 162527,
+   "tool_out_bytes": 59256,
+   "tool_inv_bytes": 20851
+  },
+  {
+   "ts": "2026-08-28T17:11:25.819000Z",
+   "it": 23,
+   "ctx_tok": 75164,
+   "ctx_bytes": 165354,
+   "tool_out_bytes": 62429,
+   "tool_inv_bytes": 21237
+  },
+  {
+   "ts": "2026-08-28T17:11:46.660000Z",
+   "it": 24,
+   "ctx_tok": 76604,
+   "ctx_bytes": 168614,
+   "tool_out_bytes": 62813,
+   "tool_inv_bytes": 21431
+  },
+  {
+   "ts": "2026-08-28T17:12:14.280000Z",
+   "it": 26,
+   "ctx_tok": 78033,
+   "ctx_bytes": 173207,
+   "tool_out_bytes": 64129,
+   "tool_inv_bytes": 21961
+  },
+  {
+   "ts": "2026-08-28T17:12:36.594000Z",
+   "it": 28,
+   "ctx_tok": 79094,
+   "ctx_bytes": 175228,
+   "tool_out_bytes": 68653,
+   "tool_inv_bytes": 22168
+  },
+  {
+   "ts": "2026-08-28T17:12:46.781000Z",
+   "it": 30,
+   "ctx_tok": 81246,
+   "ctx_bytes": 181172,
+   "tool_out_bytes": 68864,
+   "tool_inv_bytes": 23838
+  },
+  {
+   "ts": "2026-08-28T17:13:16.220000Z",
+   "it": 32,
+   "ctx_tok": 82268,
+   "ctx_bytes": 183147,
+   "tool_out_bytes": 71515,
+   "tool_inv_bytes": 24383
+  },
+  {
+   "ts": "2026-08-28T17:13:20.411000Z",
+   "it": 33,
+   "ctx_tok": 83363,
+   "ctx_bytes": 185680,
+   "tool_out_bytes": 73598,
+   "tool_inv_bytes": 24421
+  },
+  {
+   "ts": "2026-08-28T17:14:07.372000Z",
+   "it": 35,
+   "ctx_tok": 84516,
+   "ctx_bytes": 188246,
+   "tool_out_bytes": 76810,
+   "tool_inv_bytes": 24686
+  },
+  {
+   "ts": "2026-08-28T17:14:13.526000Z",
+   "it": 36,
+   "ctx_tok": 86140,
+   "ctx_bytes": 191407,
+   "tool_out_bytes": 78003,
+   "tool_inv_bytes": 24904
+  },
+  {
+   "ts": "2026-08-28T17:14:25.903000Z",
+   "it": 38,
+   "ctx_tok": 87540,
+   "ctx_bytes": 195219,
+   "tool_out_bytes": 79352,
+   "tool_inv_bytes": 25572
+  },
+  {
+   "ts": "2026-08-28T17:15:08.465000Z",
+   "it": 40,
+   "ctx_tok": 88264,
+   "ctx_bytes": 196468,
+   "tool_out_bytes": 82419,
+   "tool_inv_bytes": 25837
+  },
+  {
+   "ts": "2026-08-28T17:15:16.578000Z",
+   "it": 42,
+   "ctx_tok": 90050,
+   "ctx_bytes": 200413,
+   "tool_out_bytes": 86776,
+   "tool_inv_bytes": 26515
+  },
+  {
+   "ts": "2026-08-28T17:15:36.299000Z",
+   "it": 43,
+   "ctx_tok": 92004,
+   "ctx_bytes": 205067,
+   "tool_out_bytes": 88593,
+   "tool_inv_bytes": 26808
+  },
+  {
+   "ts": "2026-08-28T17:16:17.559000Z",
+   "it": 46,
+   "ctx_tok": 93868,
+   "ctx_bytes": 209204,
+   "tool_out_bytes": 91107,
+   "tool_inv_bytes": 27348
+  },
+  {
+   "ts": "2026-08-28T17:16:22.659000Z",
+   "it": 47,
+   "ctx_tok": 94508,
+   "ctx_bytes": 211261,
+   "tool_out_bytes": 92752,
+   "tool_inv_bytes": 27601
+  },
+  {
+   "ts": "2026-08-28T17:16:31.831000Z",
+   "it": 48,
+   "ctx_tok": 95507,
+   "ctx_bytes": 214202,
+   "tool_out_bytes": 94663,
+   "tool_inv_bytes": 27818
+  },
+  {
+   "ts": "2026-08-28T17:16:42.555000Z",
+   "it": 50,
+   "ctx_tok": 97140,
+   "ctx_bytes": 218369,
+   "tool_out_bytes": 98153,
+   "tool_inv_bytes": 28342
+  },
+  {
+   "ts": "2026-08-28T17:16:54.984000Z",
+   "it": 51,
+   "ctx_tok": 98496,
+   "ctx_bytes": 222955,
+   "tool_out_bytes": 104327,
+   "tool_inv_bytes": 34406
+  },
+  {
+   "ts": "2026-08-28T17:18:06.211000Z",
+   "it": 54,
+   "ctx_tok": 101127,
+   "ctx_bytes": 228768,
+   "tool_out_bytes": 106030,
+   "tool_inv_bytes": 35233
+  },
+  {
+   "ts": "2026-08-28T17:18:34.045000Z",
+   "it": 55,
+   "ctx_tok": 101462,
+   "ctx_bytes": 229361,
+   "tool_out_bytes": 107759,
+   "tool_inv_bytes": 35532
+  },
+  {
+   "ts": "2026-08-28T17:18:47.022000Z",
+   "it": 57,
+   "ctx_tok": 102850,
+   "ctx_bytes": 233881,
+   "tool_out_bytes": 108459,
+   "tool_inv_bytes": 36488
+  },
+  {
+   "ts": "2026-08-31T06:01:58.145000Z",
+   "it": 193,
+   "ctx_tok": 120189,
+   "ctx_bytes": 255267,
+   "tool_out_bytes": 667760,
+   "tool_inv_bytes": 155848
+  },
+  {
+   "ts": "2026-09-01T05:23:34.629000Z",
+   "it": 197,
+   "ctx_tok": 128784,
+   "ctx_bytes": 279834,
+   "tool_out_bytes": 673857,
+   "tool_inv_bytes": 167682
+  },
+  {
+   "ts": "2026-09-01T10:57:22.510000Z",
+   "it": 200,
+   "ctx_tok": 67194,
+   "ctx_bytes": 145823,
+   "tool_out_bytes": 687149,
+   "tool_inv_bytes": 168944
+  },
+  {
+   "ts": "2026-09-01T10:57:54.384000Z",
+   "it": 203,
+   "ctx_tok": 99970,
+   "ctx_bytes": 189157,
+   "tool_out_bytes": 731644,
+   "tool_inv_bytes": 170015
+  },
+  {
+   "ts": "2026-09-01T10:59:24.114000Z",
+   "it": 210,
+   "ctx_tok": 111524,
+   "ctx_bytes": 216253,
+   "tool_out_bytes": 773699,
+   "tool_inv_bytes": 174864
+  },
+  {
+   "ts": "2026-09-01T11:00:36.816000Z",
+   "it": 213,
+   "ctx_tok": 119237,
+   "ctx_bytes": 239193,
+   "tool_out_bytes": 782178,
+   "tool_inv_bytes": 181860
+  },
+  {
+   "ts": "2026-09-01T11:03:31.966000Z",
+   "it": 216,
+   "ctx_tok": 135091,
+   "ctx_bytes": 280304,
+   "tool_out_bytes": 782650,
+   "tool_inv_bytes": 222142
+  },
+  {
+   "ts": "2026-09-01T11:04:15.365000Z",
+   "it": 221,
+   "ctx_tok": 148037,
+   "ctx_bytes": 311815,
+   "tool_out_bytes": 795162,
+   "tool_inv_bytes": 226714
+  },
+  {
+   "ts": "2026-09-01T11:04:31.583000Z",
+   "it": 225,
+   "ctx_tok": 78241,
+   "ctx_bytes": 171813,
+   "tool_out_bytes": 815407,
+   "tool_inv_bytes": 227988
+  },
+  {
+   "ts": "2026-09-01T17:02:26.643000Z",
+   "it": 235,
+   "ctx_tok": 117283,
+   "ctx_bytes": 235792,
+   "tool_out_bytes": 856696,
+   "tool_inv_bytes": 235168
+  }
+ ]
+}

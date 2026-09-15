@@ -1,0 +1,180 @@
+{
+  "model": "claude-sonnet-4-5",
+  "note": "Usage fields are null where the per-task Claude API usage response was not exposed to the agent session that performed the work. Fill them in from the Anthropic usage/billing export (or the raw message responses) and re-run scripts/aidlc-cost.mjs; do not estimate them.",
+  "rates_per_mtok": {
+    "input": 3.0,
+    "cache_write": 3.75,
+    "cache_read": 0.3,
+    "output": 15.0
+  },
+  "tasks": [
+    {
+      "phase": "Inception",
+      "task": "A1-A2 Read repo config and produce migration BRD",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Inception",
+      "task": "A3 Break BRD into units of work with acceptance criteria",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B1 Angular 10 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B2 Angular 11 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B3 Angular 12 bump (Sass math.div, Ivy-only)",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B4 Angular 13 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B5 Angular 14 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B6 Angular 15 bump and Protractor removal",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B7 Angular 16 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B8 Angular 17 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B9 Angular 18 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B10 Angular 19 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "B11 Angular 20 bump",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "C1-C3 RxJS 7, zone.js, TypeScript/tslib/@types/node",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "C5 TSLint/codelyzer to angular-eslint",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "C6 Karma headless + first unit specs",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "C7 Playwright e2e replacement",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "C8 Application builder migration and output layout",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Construction",
+      "task": "C9 Standalone components, inject(), control flow",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Operations",
+      "task": "D1-D4 Travis, Firebase, ngsw-config, README",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    },
+    {
+      "phase": "Metrics",
+      "task": "E1-E2 Prompt prefix artifact and cost tooling",
+      "input_tokens": null,
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "output_tokens": null
+    }
+  ]
+}
